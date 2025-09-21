@@ -1,10 +1,3 @@
-type GetMapMethod<T> = T extends readonly [
-  readonly [infer K, infer V],
-  ...infer Remain,
-]
-  ? ((key: K) => V) & GetMapMethod<Readonly<Remain>>
-  : unknown
-
 type ValueForEachParams<T> =
   T extends ReadonlyArray<readonly [unknown, unknown]>
     ? T extends readonly [readonly [unknown, infer V], ...infer Remain]
@@ -27,6 +20,17 @@ type AllForEachParams<M extends ReadonlyArray<readonly [unknown, unknown]>, T> =
           | AllForEachParams<M, Readonly<Remain>>
       : never
     : never
+
+type GetValueByKey<
+  Entries extends readonly unknown[],
+  Key,
+> = Entries extends readonly [infer FirstItem, ...infer Remain]
+  ? FirstItem extends readonly [infer K, infer V]
+    ? K extends Key
+      ? V | GetValueByKey<Remain, Key>
+      : GetValueByKey<Remain, Key>
+    : never
+  : never
 
 type RestrictedMapKeyType<T> = T extends readonly [
   readonly [infer K, unknown],
@@ -77,9 +81,9 @@ export interface RestrictedMapInterface<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   forEach(callback: () => void, thisArg?: any): void
 
-  get: GetMapMethod<T>
+  get<K extends RestrictedMapKeyType<T>>(key: K): GetValueByKey<T, K>
 
-  has(key: unknown): boolean
+  has(key: unknown): key is RestrictedMapKeyType<T>
 
   readonly size: number
 
