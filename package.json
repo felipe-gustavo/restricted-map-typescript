@@ -1,0 +1,58 @@
+{
+  "name": "restricted-map-typescript",
+  "packageManager": "yarn@4.10.2",
+  "description": "A extension for a readonly restricted map for typescript",
+  "type": "commonjs",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./src/types/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "yarn transpile && yarn copy-types",
+    "copy-types": "cpy 'src/types/*.d.ts' dist/types",
+    "transpile": "tsc -p tsconfig-build.json",
+    "test": "echo \"No tests, this is a typescript declare repository\" && exit 0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.27.0",
+    "@typescript-eslint/parser": "^8.44.0",
+    "cpy-cli": "^6.0.0",
+    "eslint": "^9.27.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-import-resolver-typescript": "^4.3.5",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.4.0",
+    "globals": "^16.1.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.32.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felipe-gustavo/restricted-map-typescript.git"
+  },
+  "keywords": [
+    "key-value",
+    "typescript-map",
+    "map",
+    "readonly",
+    "readonly-map",
+    "restricted",
+    "restricted-map"
+  ],
+  "author": "khaous",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/felipe-gustavo/restricted-map-typescript/issues"
+  },
+  "homepage": "https://github.com/felipe-gustavo/restricted-map-typescript#readme"
+}
