@@ -32,14 +32,14 @@ type GetValueByKey<
     : never
   : never
 
-type RestrictedMapKeyType<T> = T extends readonly [
+export type RestrictedMapKeyType<T> = T extends readonly [
   readonly [infer K, unknown],
   ...infer Remain,
 ]
   ? K | RestrictedMapKeyType<Readonly<Remain>>
   : never
 
-type RestrictedMapValueType<T> = T extends readonly [
+export type RestrictedMapValueType<T> = T extends readonly [
   readonly [unknown, infer V],
   ...infer Remain,
 ]
