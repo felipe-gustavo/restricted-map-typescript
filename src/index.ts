@@ -21,7 +21,7 @@ type AllForEachParams<M extends ReadonlyArray<readonly [unknown, unknown]>, T> =
       : never
     : never
 
-type GetValueByKey<
+export type GetValueByKey<
   Entries extends readonly unknown[],
   Key,
 > = Entries extends readonly [infer FirstItem, ...infer Remain]
